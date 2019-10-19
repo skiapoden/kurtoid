@@ -9,5 +9,4 @@ RUN pip install -r requirements.txt
 COPY fakekit/ /app/fakekit
 COPY hello.py /app
 
-EXPOSE 8000
-CMD gunicorn -b 0.0.0.0:8000 hello:app
+CMD python ./hello.py
