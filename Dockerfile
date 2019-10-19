@@ -10,5 +10,4 @@ COPY fakekit/ /app/fakekit
 COPY hello.py /app
 
 EXPOSE 8000
-
-CMD gunicorn hello:app --log-file=-
+CMD gunicorn -b 0.0.0.0:8000 hello:app
