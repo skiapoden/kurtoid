@@ -24,4 +24,5 @@ Test the application:
 
 Publish to Heroku:
 
+    $ heroku login
     $ username="[EnterpriseLab User Name]" password="[EnterpriseLab Password]" ./deploy.sh

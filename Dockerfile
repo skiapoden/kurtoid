@@ -15,6 +15,6 @@ RUN git clone https://"${username}":"${password}"@gitlab.enterpriselab.ch/JassBo
     pip install .
 
 WORKDIR /app
-COPY hello.py /app
+COPY app/*.py /app
 
 CMD python ./hello.py
