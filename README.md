@@ -20,7 +20,7 @@ Run the Docker container:
 
 Test the application:
 
-    $ curl localhost:5000
+    $ curl localhost:33507
 
 Publish to Heroku:
 
