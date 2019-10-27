@@ -17,5 +17,5 @@ RUN git clone https://"${username}":"${password}"@gitlab.enterpriselab.ch/JassBo
 WORKDIR /app
 COPY app/*.py /app/
 
-ENV PORT=33507
+ENV PORT=5000
 CMD gunicorn -b 0.0.0.0:${PORT} main:app

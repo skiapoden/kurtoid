@@ -1,3 +1,3 @@
 #!/bin/sh
 
-PORT=33507 docker run -it --rm --name kurtoidapp -p 33507:33507 kurtoid
+PORT=5000 docker run -it --rm --name kurtoidapp -p 5000:5000 kurtoid
