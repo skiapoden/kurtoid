@@ -1,5 +1,8 @@
 import logging
 
+from math import factorial
+from itertools import permutations
+
 import numpy as np
 
 from jass.base.const import *
@@ -9,7 +12,10 @@ from jass.base.rule_schieber import RuleSchieber
 
 from kurtutils import extract_others_card_indices, calculate_outcome
 
-class Kurtoid(Player):
+class Permutoid(Player):
+
+    PERMUTATION_THRESHOLD = 7
+    RANDOM_SAMPLING_SIZE = 16
 
     def __init__(self):
         self._logger = logging.getLogger(__name__)
@@ -44,12 +50,24 @@ class Kurtoid(Player):
 
             # simulate others cards
             cards_missing = MAX_PLAYER - our_trick_index
-            others_choices = np.random.choice(others_indices, cards_missing, replace=False)
-            np.put(simulated_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
+            choice_sets = self.build_choice_sets(others_indices, cards_missing)
 
-            round_result = calculate_outcome(rnd, simulated_trick)
-            if round_result > best_result:
-                best_result = round_result
-                best_card = card_index
+            for others_choices in choice_sets:
+                np.put(simulated_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
+                round_result = calculate_outcome(rnd, simulated_trick)
+                if round_result > best_result:
+                    best_result = round_result
+                    best_card = card_index
 
         return best_card
+
+
+    def build_choice_sets(self, others_indices, n_cards_missing):
+        if others_indices.size <= self.PERMUTATION_THRESHOLD:
+            return permutations(others_indices)
+
+        choice_sets = []
+        for i in range(self.RANDOM_SAMPLING_SIZE):
+            choice = np.random.choice(others_indices, n_cards_missing, replace=False)
+            choice_sets.append(choice)
+        return choice_sets
