@@ -8,6 +8,8 @@ from jass.base.player_round import PlayerRound
 from jass.player.player import Player
 from jass.base.rule_schieber import RuleSchieber
 
+from kurtutils import extract_others_card_indices, calculate_outcome
+
 class Kurtoid(Player):
 
     def __init__(self):
@@ -25,7 +27,7 @@ class Kurtoid(Player):
         return trump
 
     def play_card(self, rnd: PlayerRound) -> int:
-        others_indices = self.extract_others_card_indices(rnd)
+        others_indices = extract_others_card_indices(rnd)
 
         valid_cards = rnd.get_valid_cards()
         our_trick_index = np.where(rnd.current_trick == -1)[0][0]
@@ -46,31 +48,9 @@ class Kurtoid(Player):
             others_choices = np.random.choice(others_indices, cards_missing, replace=False)
             np.put(simulated_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
 
-            round_result = self.calculate_outcome(rnd, simulated_trick)
+            round_result = calculate_outcome(rnd, simulated_trick)
             if round_result > best_result:
                 best_result = round_result
                 best_card = card_index
 
         return best_card
-
-
-    def extract_others_card_indices(self, rnd: PlayerRound):
-        cards_played = rnd.tricks.flatten()
-        cards_played = cards_played[cards_played != -1]
-
-        cards_unplayed = np.ones(36, dtype=np.int32)
-        cards_unplayed[cards_played] = 0
-
-        others_cards = cards_unplayed - rnd.hand
-        return np.where(others_cards == 1)[0]
-
-
-    def calculate_outcome(self, rnd: PlayerRound, simulated_trick):
-        round_result = rnd.rule.calc_points(simulated_trick, rnd.nr_tricks == 7, rnd.trump)
-        round_winner = rnd.rule.calc_winner(simulated_trick, rnd.trick_first_player[rnd.nr_tricks], rnd.trump)
-
-        if round_winner % 2 != rnd.player % 2:
-            # invert score if other team made the trick
-            round_result *= -1
-
-        return round_result
