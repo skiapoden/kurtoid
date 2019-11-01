@@ -37,15 +37,15 @@ class Kurtoid(Player):
         valid_card_indices = np.where(valid_cards == 1)[0]
         if valid_card_indices.size == 1:
             return valid_card_indices[0]
-        best_result = -9999 # TODO: use some constant
+
+        best_result = np.iinfo(np.int32).min
         best_card = -1
         for card_index in valid_card_indices:
             current_trick = rnd.current_trick
             current_trick[our_trick_index] = card_index
             cards_missing = 3 - our_trick_index
-            # TODO: do this for different permutations
             others_choices = np.random.choice(others_indices, cards_missing, replace=False)
-            np.put(current_trick, range(our_trick_index+1,4), others_choices)
+            np.put(current_trick, range(our_trick_index+1, 4), others_choices)
             round_result = rnd.rule.calc_points(current_trick, rnd.nr_tricks == 7, rnd.trump)
             round_winner = rnd.rule.calc_winner(current_trick, rnd.trick_first_player[rnd.nr_tricks], rnd.trump)
             if round_winner % 2 == rnd.player % 2:
@@ -58,7 +58,3 @@ class Kurtoid(Player):
                 best_result = round_result
                 best_card = card_index
         return best_card
-
-        #card = np.random.choice(np.flatnonzero(valid_cards))
-        #self._logger.debug('Played card: {}'.format(card_strings[card]))
-        #return card
