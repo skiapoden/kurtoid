@@ -15,11 +15,14 @@ class Kurtoid(Player):
         self._rule = RuleSchieber()
 
     def select_trump(self, rnd: PlayerRound) -> int:
-        possible_trump = trump_ints.copy()
-        if rnd.forehand is None:
-            possible_trump.append(PUSH)
-        self._logger.debug('Selected trump: {}'.format(possible_trump))
-        return random.choice(possible_trump)
+        trump = 0
+        max_number_in_color = 0
+        for c in range(4):
+            number_in_color = (rnd.hand * color_masks[c]).sum()
+            if number_in_color > max_number_in_color:
+                max_number_in_color = number_in_color
+                trump = c
+        return trump
 
     def play_card(self, rnd: PlayerRound) -> int:
         cards_played = rnd.tricks.flatten()
