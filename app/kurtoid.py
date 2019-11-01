@@ -25,12 +25,7 @@ class Kurtoid(Player):
         return trump
 
     def play_card(self, rnd: PlayerRound) -> int:
-        cards_played = rnd.tricks.flatten()
-        cards_played = cards_played[cards_played != -1]
-        cards_unplayed = np.ones(36, dtype=np.int32)
-        cards_unplayed[cards_played] = 0
-        others_cards = cards_unplayed - rnd.hand
-        others_indices = np.where(others_cards == 1)[0]
+        others_indices = self.extract_others_card_indices(rnd)
 
         valid_cards = rnd.get_valid_cards()
         our_trick_index = np.where(rnd.current_trick == -1)[0][0]
@@ -42,19 +37,40 @@ class Kurtoid(Player):
         best_card = -1
         for card_index in valid_card_indices:
             current_trick = rnd.current_trick
+
+            # put our card
             current_trick[our_trick_index] = card_index
-            cards_missing = 3 - our_trick_index
+
+            # simulate others cards
+            cards_missing = MAX_PLAYER - our_trick_index
             others_choices = np.random.choice(others_indices, cards_missing, replace=False)
-            np.put(current_trick, range(our_trick_index+1, 4), others_choices)
-            round_result = rnd.rule.calc_points(current_trick, rnd.nr_tricks == 7, rnd.trump)
-            round_winner = rnd.rule.calc_winner(current_trick, rnd.trick_first_player[rnd.nr_tricks], rnd.trump)
-            if round_winner % 2 == rnd.player % 2:
-                # we win, nothing to do
-                pass
-            else:
-                # they win, count result as a negative
-                round_result = -round_result
+            np.put(current_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
+
+            round_result = self.calculate_outcome(rnd, current_trick)
             if round_result > best_result:
                 best_result = round_result
                 best_card = card_index
+
         return best_card
+
+
+    def extract_others_card_indices(self, rnd: PlayerRound):
+        cards_played = rnd.tricks.flatten()
+        cards_played = cards_played[cards_played != -1]
+
+        cards_unplayed = np.ones(36, dtype=np.int32)
+        cards_unplayed[cards_played] = 0
+
+        others_cards = cards_unplayed - rnd.hand
+        return np.where(others_cards == 1)[0]
+
+
+    def calculate_outcome(self, rnd: PlayerRound, simulated_trick):
+        round_result = rnd.rule.calc_points(simulated_trick, rnd.nr_tricks == 7, rnd.trump)
+        round_winner = rnd.rule.calc_winner(simulated_trick, rnd.trick_first_player[rnd.nr_tricks], rnd.trump)
+
+        if round_winner % 2 != rnd.player % 2:
+            # invert score if other team made the trick
+            round_result *= -1
+
+        return round_result
