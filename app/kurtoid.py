@@ -7,7 +7,7 @@ from jass.base.player_round import PlayerRound
 from jass.player.player import Player
 from jass.base.rule_schieber import RuleSchieber
 
-from kurtutils import extract_others_card_indices, calculate_outcome
+from kurtutils import extract_others_card_indices, calculate_round_outcome
 
 class Kurtoid(Player):
 
@@ -47,7 +47,7 @@ class Kurtoid(Player):
             others_choices = np.random.choice(others_indices, cards_missing, replace=False)
             np.put(simulated_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
 
-            round_result = calculate_outcome(rnd, simulated_trick)
+            round_result = calculate_round_outcome(rnd, simulated_trick)
             if round_result > best_result:
                 best_result = round_result
                 best_card = card_index

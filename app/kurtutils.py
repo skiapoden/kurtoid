@@ -13,7 +13,7 @@ def extract_others_card_indices(rnd: PlayerRound):
     return np.where(others_cards == 1)[0]
 
 
-def calculate_outcome(rnd: PlayerRound, simulated_trick):
+def calculate_round_outcome(rnd: PlayerRound, simulated_trick):
     round_result = rnd.rule.calc_points(simulated_trick, rnd.nr_tricks == 7, rnd.trump)
     round_winner = rnd.rule.calc_winner(simulated_trick, rnd.trick_first_player[rnd.nr_tricks], rnd.trump)
 
