@@ -7,6 +7,7 @@ from jass.base.player_round import PlayerRound
 from jass.player.player import Player
 from jass.base.rule_schieber import RuleSchieber
 
+from parallel_universe import ParallelUniverse
 from kurtutils import extract_others_card_indices, calculate_round_outcome_winner
 
 class Carloid(Player):
@@ -14,6 +15,7 @@ class Carloid(Player):
     def __init__(self):
         self._logger = logging.getLogger(__name__)
         self._rule = RuleSchieber()
+
 
     def select_trump(self, rnd: PlayerRound) -> int:
         trump = 0
@@ -25,25 +27,27 @@ class Carloid(Player):
                 trump = c
         return trump
 
+
     def play_card(self, rnd: PlayerRound) -> int:
         valid_cards = rnd.get_valid_cards()
         valid_card_indices = np.where(valid_cards == 1)[0]
         best_result = np.iinfo(np.int32).min
         best_card = -1
         for card_index in valid_card_indices:
-            round_result = self.simulate_round(card_index, rnd)
+            rnd_copy = ParallelUniverse.from_player_round(rnd)
+            round_result = self.simulate_round(card_index, rnd_copy)
             if round_result > best_result:
                 best_result = round_result
                 best_card = card_index
         return best_card
 
-    def simulate_round(self, our_card, rnd):
+
+    def simulate_round(self, our_card: int, rnd: ParallelUniverse) -> int:
         this_trick = self.simulate_trick(our_card, rnd)
-        if rnd.nr_tricks == 8: # TODO: adapt depth as needed
+        if rnd.nr_tricks <= 8: # TODO: adapt depth as needed
             return this_trick
         else:
             # TODO simulate for every valid card (loop)
-            rnd.nr_tricks += 1 # make sure recursion terminates
             valid_cards = rnd.get_valid_cards()
             valid_card_indices = np.where(valid_cards == 1)[0]
             best_outcome = np.iinfo(np.int32).min
@@ -55,6 +59,7 @@ class Carloid(Player):
                     best_outcome = outcome
                     best_card = card_index
             return best_outcome
+
 
     def simulate_trick(self, our_card, rnd):
         # FIXME: dummy implementation
