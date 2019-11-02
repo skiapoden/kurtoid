@@ -11,6 +11,7 @@ from jass.player.random_player_schieber import RandomPlayerSchieber
 from kurtoid import Kurtoid
 from donat_trump import DonatTrump
 from permutoid import Permutoid
+from carloid import Carloid
 
 def main(n_games):
     arena = Arena(jass_type=JASS_SCHIEBER_2500,
@@ -21,8 +22,9 @@ def main(n_games):
     donat = DonatTrump()
     kurtoid = Kurtoid()
     permutoid = Permutoid()
+    carloid = Carloid()
 
-    arena.set_players(permutoid, kurtoid, randy, donat)
+    arena.set_players(carloid, kurtoid, kurtoid, kurtoid)
 
     arena.nr_games_to_play = n_games
     arena.play_all_games()
