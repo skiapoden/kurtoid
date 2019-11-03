@@ -12,6 +12,7 @@ from kurtoid import Kurtoid
 from donat_trump import DonatTrump
 from permutoid import Permutoid
 from carloid import Carloid
+from trumpruloid import Trumpruloid
 
 def main(n_games):
     arena = Arena(jass_type=JASS_SCHIEBER_2500,
@@ -22,9 +23,10 @@ def main(n_games):
     donat = DonatTrump()
     kurtoid = Kurtoid()
     permutoid = Permutoid()
-    carloid = Carloid(2)
+    carloid = Carloid(3)
+    trumpruloid = Trumpruloid()
 
-    arena.set_players(carloid, kurtoid, carloid, kurtoid)
+    arena.set_players(trumpruloid, randy, trumpruloid, randy)
 
     arena.nr_games_to_play = n_games
     arena.play_all_games()
