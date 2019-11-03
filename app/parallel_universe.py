@@ -39,8 +39,5 @@ class ParallelUniverse:
 
 
     def get_valid_cards(self):
-        cards_in_trick = np.empty(0)
-        played_cards = np.where(self.tricks != -1)[0]
-        if played_cards.size > 0:
-            cards_in_trick = played_cards[0]
-        return self.rule.get_valid_cards(self.our_hand, self.trick, cards_in_trick, self.trump)
+        played_cards = np.where(self.trick != -1)[0]
+        return self.rule.get_valid_cards(self.our_hand, self.trick, played_cards.size, self.trump)
