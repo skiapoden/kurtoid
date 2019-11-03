@@ -29,57 +29,64 @@ class Carloid(Player):
 
 
     def play_card(self, rnd: PlayerRound) -> int:
+        rnd_copy = ParallelUniverse.from_player_round(rnd)
+        our_trick_index = np.where(rnd.current_trick == -1)[0][0]
+
+        depth = min(8 - rnd.nr_tricks, 3)
+        return self.find_best_card(rnd_copy, our_trick_index, depth)
+
+
+    def find_best_card(self, rnd: ParallelUniverse, our_trick_index: int, depth: int) -> int:
         valid_cards = rnd.get_valid_cards()
         valid_card_indices = np.where(valid_cards == 1)[0]
+
+        unplayed_indices = np.where(rnd.trick == -1)[0]
+        unplayed_indices = np.where(unplayed_indices != our_trick_index)[0]
+
         best_result = np.iinfo(np.int32).min
         best_card = -1
+
         for card_index in valid_card_indices:
-            rnd_copy = ParallelUniverse.from_player_round(rnd)
-            round_result = self.simulate_round(card_index, rnd_copy)
-            if round_result > best_result:
-                best_result = round_result
+            # our move
+            rnd.trick[our_trick_index] = card_index
+
+            # their moves
+            others_card_indices = self.extract_others_card_indices(rnd.tricks, rnd.our_hand)
+            others_choices = np.random.choice(others_card_indices, unplayed_indices.size, replace=False)
+            rnd.trick[unplayed_indices] = others_choices
+
+            result, winner = self.simulate_trick(rnd, our_trick_index)
+            our_next_trick_index = (4 - winner) % 4
+            if depth > 0:
+                pass 
+                # TODO: copy rnd (TODO set player attribute correctly)
+                # TODO: simulate subsequent rounds, call with depth-1
+                # TODO: add other rounds outcomes to result
+            if result > best_result:
+                best_result = result
                 best_card = card_index
+
         return best_card
 
 
-    def simulate_round(self, our_card: int, rnd: ParallelUniverse) -> int:
-        this_trick = self.simulate_trick(our_card, rnd)
-        if rnd.nr_tricks <= 8: # TODO: adapt depth as needed
-            return this_trick
-        else:
-            # TODO simulate for every valid card (loop)
-            valid_cards = rnd.get_valid_cards()
-            valid_card_indices = np.where(valid_cards == 1)[0]
-            best_outcome = np.iinfo(np.int32).min
-            best_card = -1
-            for card_index in valid_card_indices:
-                # TODO: manipulate rnd as needed, maybe create a copy
-                outcome = this_trick + self.simulate_round(card_index, rnd)
-                if outcome > best_outcome:
-                    best_outcome = outcome
-                    best_card = card_index
-            return best_outcome
+    def simulate_trick(self, rnd, our_trick_index):
+        round_result = rnd.rule.calc_points(rnd.trick, rnd.nr_tricks == 8, rnd.trump)
+        first_player = (4 - our_trick_index) % 4
+        round_winner = rnd.rule.calc_winner(rnd.trick, first_player, rnd.trump)
+
+        if round_winner % 2 != rnd.player % 2:
+            # invert score if other team made the trick
+            round_result *= -1
+
+        return (round_result, round_winner)
 
 
-    def simulate_trick(self, our_card, rnd):
-        # FIXME: dummy implementation
-        # who won? this player begins the next round
-        return 0
+    def extract_others_card_indices(self, tricks, our_hand):
+        cards_played = tricks.flatten()
+        cards_played = cards_played[cards_played != -1]
 
-# others_indices = extract_others_card_indices(rnd)
+        cards_unplayed = np.ones(36, dtype=np.int32)
+        cards_unplayed[cards_played] = 0
 
-# our_trick_index = np.where(rnd.current_trick == -1)[0][0]
-# valid_cards = rnd.get_valid_cards()
-# valid_card_indices = np.where(valid_cards == 1)[0]
-# if valid_card_indices.size == 1:
-    # return valid_card_indices[0]
-
-# simulated_trick = rnd.current_trick
-
-# put our card
-# simulated_trick[our_trick_index] = card_index
-
-# simulate others cards
-# cards_missing = MAX_PLAYER - our_trick_index
-# others_choices = np.random.choice(others_indices, cards_missing, replace=False)
-# np.put(simulated_trick, range(our_trick_index+1, MAX_PLAYER+1), others_choices)
+        others_cards = cards_unplayed - our_hand
+        return np.where(others_cards == 1)[0]

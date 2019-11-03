@@ -14,18 +14,20 @@ class ParallelUniverse:
         our_hand = np.copy(rnd.hand)
         rule = rnd.rule
         trick = np.copy(rnd.current_trick)
+        player = rnd.player
 
-        instance = ParallelUniverse(tricks, others_cards, our_hand, rule, rnd.trump, trick)
+        instance = ParallelUniverse(tricks, others_cards, our_hand, rule, rnd.trump, trick, player)
         return instance
 
 
-    def __init__(self, tricks, others_cards, our_hand, rule, trump, trick):
+    def __init__(self, tricks, others_cards, our_hand, rule, trump, trick, player):
         self.tricks = tricks
         self.others_cards = others_cards
         self.our_hand = our_hand
         self.rule = rule
         self.trump = trump
         self.trick = trick
+        self.player = player
 
 
     @property
