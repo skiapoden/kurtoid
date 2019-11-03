@@ -24,7 +24,7 @@ def main(n_games):
     permutoid = Permutoid()
     carloid = Carloid()
 
-    arena.set_players(carloid, kurtoid, kurtoid, kurtoid)
+    arena.set_players(carloid, kurtoid, carloid, kurtoid)
 
     arena.nr_games_to_play = n_games
     arena.play_all_games()

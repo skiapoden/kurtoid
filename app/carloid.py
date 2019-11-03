@@ -41,8 +41,7 @@ class Carloid(Player):
         valid_card_indices = np.where(valid_cards == 1)[0]
 
         unplayed_indices = np.where(rnd.trick == -1)[0]
-        unplayed_indices = np.where(unplayed_indices != our_trick_index)[0]
-        # TODO: verify that unplayed_indices just contains the others indices
+        unplayed_indices = unplayed_indices[unplayed_indices != our_trick_index]
 
         best_result = np.iinfo(np.int32).min
         best_card = -1
