@@ -14,7 +14,7 @@ def create_app():
     app.add_player('Randy', RandomPlayerSchieber())
     app.add_player('Permi', Permutoid())
     for depth in range(4):
-        app.add_player('Carlo'+depth, Carloid(), depth)
+        app.add_player('Carlo{:d}'.format(depth), Carloid(depth))
 
     return app
 
