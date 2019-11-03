@@ -12,6 +12,8 @@ from rule_based_trump import get_trumps, get_boeck
 
 class Trumpruloid(Player):
 
+    PUSH_THRESHOLD = 5 # average calculated strength
+
     def __init__(self):
         self._logger = logging.getLogger(__name__)
         self._rule = RuleSchieber()
@@ -26,7 +28,7 @@ class Trumpruloid(Player):
         sorted_score = sorted(score.items(), key=lambda kv: kv[1])
         sorted_score.reverse()
 
-        if rnd.forehand is None and sorted_score[0][1] < 5:
+        if rnd.forehand is None and sorted_score[0][1] < self.PUSH_THRESHOLD:
             return PUSH # gschobe (if forehand and bad score)
 
         trump = sorted_score[0][0]

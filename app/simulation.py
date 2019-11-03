@@ -39,6 +39,7 @@ def main(n_games):
     print('Our Team  {:4d} {:5.1f}%'.format(kurtoid_wins, kurtoid_wins / total * 100))
     print('Opponents {:4d} {:5.1f}%'.format(opponent_wins, opponent_wins / total * 100))
     print('Draws     {:4d} {:5.1f}%'.format(draws, draws / total * 100))
+    print('Δ Points  {:4d}'.format(arena.delta_points))
 
 
 if __name__ == '__main__':
