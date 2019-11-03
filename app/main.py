@@ -3,12 +3,16 @@ from jass.player.random_player_schieber import RandomPlayerSchieber
 
 from kurtoid import Kurtoid
 from donat_trump import DonatTrump
+from permutoid import Permutoid
+from carloid import Carloid
 
 def create_app():
     app = PlayerServiceApp('kurtoid_service')
     app.add_player('Kurt', Kurtoid())
     app.add_player('Maurin', DonatTrump())
     app.add_player('Randy', RandomPlayerSchieber())
+    app.add_player('Permi', Permutoid())
+    app.add_player('Carlo', Carloid())
     return app
 
 app = create_app()
