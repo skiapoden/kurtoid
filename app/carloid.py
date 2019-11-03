@@ -66,9 +66,8 @@ class Carloid(Player):
             result, winner = self.simulate_trick(rnd, our_trick_index)
             our_next_trick_index = (4 - winner) % 4
             if depth > 0:
-                pass
                 trick = np.full(4, -1)
-                player = our_next_trick_index # TODO: is this the right value?
+                player = rnd.player # TODO: seems to be constant over the entire round
                 rnd_copy = ParallelUniverse(rnd.tricks, others_card_indices, hand, rnd.rule, rnd.trump, trick, player)
                 _, game_result = self.find_best_card(rnd_copy, our_next_trick_index, depth-1)
                 result += game_result
