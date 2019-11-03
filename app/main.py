@@ -5,6 +5,7 @@ from kurtoid import Kurtoid
 from donat_trump import DonatTrump
 from permutoid import Permutoid
 from carloid import Carloid
+from trumpruloid import Trumpruloid
 
 def create_app():
     app = PlayerServiceApp('kurtoid_service')
@@ -16,6 +17,7 @@ def create_app():
     for depth in range(4):
         player_name = 'Carlo{:d}'.format(depth)
         app.add_player(player_name, Carloid(depth))
+    app.add_player('Trumpruler', Trumpruloid())
 
     return app
 
