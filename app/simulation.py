@@ -26,7 +26,7 @@ def main(n_games):
     carloid = Carloid(3)
     trumpruloid = Trumpruloid()
 
-    arena.set_players(trumpruloid, randy, trumpruloid, randy)
+    arena.set_players(trumpruloid, kurtoid, trumpruloid, kurtoid)
 
     arena.nr_games_to_play = n_games
     arena.play_all_games()

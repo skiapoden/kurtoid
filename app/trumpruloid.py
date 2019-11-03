@@ -19,11 +19,16 @@ class Trumpruloid(Player):
     def select_trump(self, rnd: PlayerRound) -> int:
         trumps = get_trumps(rnd.hand)
         boeck = get_boeck(rnd.hand)
+
         score = {}
         for option in trumps.keys():
             score[option] = trumps[option] + boeck[option]
         sorted_score = sorted(score.items(), key=lambda kv: kv[1])
         sorted_score.reverse()
+
+        if rnd.forehand is None and sorted_score[0][1] < 5:
+            return PUSH # gschobe (if forehand and bad score)
+
         trump = sorted_score[0][0]
         return trump
 
