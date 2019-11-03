@@ -14,7 +14,7 @@ def create_app():
     app.add_player('Maurin', DonatTrump())
     app.add_player('Randy', RandomPlayerSchieber())
     app.add_player('Permi', Permutoid())
-    for depth in range(4):
+    for depth in range(5):
         player_name = 'Carlo{:d}'.format(depth)
         app.add_player(player_name, Carloid(depth))
     app.add_player('Trumpruler', Trumpruloid())
