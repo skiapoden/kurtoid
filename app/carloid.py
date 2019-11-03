@@ -33,7 +33,8 @@ class Carloid(Player):
         our_trick_index = np.where(rnd.current_trick == -1)[0][0]
 
         depth = min(8 - rnd.nr_tricks, 3)
-        return self.find_best_card(rnd_copy, our_trick_index, depth)
+        best_card, _ = self.find_best_card(rnd_copy, our_trick_index, depth)
+        return best_card
 
 
     def find_best_card(self, rnd: ParallelUniverse, our_trick_index: int, depth: int) -> int:
@@ -50,24 +51,32 @@ class Carloid(Player):
             # our move
             rnd.trick[our_trick_index] = card_index
 
+            # remove our used card
+            hand = np.copy(rnd.our_hand)
+            hand[card_index] = 0
+
             # their moves
             others_card_indices = self.extract_others_card_indices(rnd.tricks, rnd.our_hand)
             others_choices = np.random.choice(others_card_indices, unplayed_indices.size, replace=False)
             rnd.trick[unplayed_indices] = others_choices
 
+            # remove their used cards
+            others_card_indices = np.setdiff1d(others_card_indices, others_choices)
+
             result, winner = self.simulate_trick(rnd, our_trick_index)
             our_next_trick_index = (4 - winner) % 4
             if depth > 0:
-                pass 
-                # TODO: copy rnd (TODO set player attribute correctly, copy the rest)
-                # TODO: simulate subsequent rounds, call with depth-1
-                # TODO: add other round outcomes to result
-                # TODO: consider running multiple simulations
+                pass
+                trick = np.full(4, -1)
+                player = our_next_trick_index # TODO: is this the right value?
+                rnd_copy = ParallelUniverse(rnd.tricks, others_card_indices, hand, rnd.rule, rnd.trump, trick, player)
+                _, game_result = self.find_best_card(rnd_copy, our_next_trick_index, depth-1)
+                result += game_result
             if result > best_result:
                 best_result = result
                 best_card = card_index
 
-        return best_card
+        return (best_card, result)
 
 
     def simulate_trick(self, rnd, our_trick_index):
