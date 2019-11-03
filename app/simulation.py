@@ -22,7 +22,7 @@ def main(n_games):
     donat = DonatTrump()
     kurtoid = Kurtoid()
     permutoid = Permutoid()
-    carloid = Carloid()
+    carloid = Carloid(2)
 
     arena.set_players(carloid, kurtoid, carloid, kurtoid)
 

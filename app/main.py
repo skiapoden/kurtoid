@@ -8,11 +8,14 @@ from carloid import Carloid
 
 def create_app():
     app = PlayerServiceApp('kurtoid_service')
+
     app.add_player('Kurt', Kurtoid())
     app.add_player('Maurin', DonatTrump())
     app.add_player('Randy', RandomPlayerSchieber())
     app.add_player('Permi', Permutoid())
-    app.add_player('Carlo', Carloid())
+    for depth in range(4):
+        app.add_player('Carlo'+depth, Carloid(), depth)
+
     return app
 
 app = create_app()

@@ -12,9 +12,10 @@ from kurtutils import extract_others_card_indices, calculate_round_outcome_winne
 
 class Carloid(Player):
 
-    def __init__(self):
+    def __init__(self, recursion_level):
         self._logger = logging.getLogger(__name__)
         self._rule = RuleSchieber()
+        self._depth = recursion_level
 
 
     def select_trump(self, rnd: PlayerRound) -> int:
@@ -32,7 +33,7 @@ class Carloid(Player):
         rnd_copy = ParallelUniverse.from_player_round(rnd)
         our_trick_index = np.where(rnd.current_trick == -1)[0][0]
 
-        depth = min(8 - rnd.nr_tricks, 3)
+        depth = min(8 - rnd.nr_tricks, self._depth)
         best_card, _ = self.find_best_card(rnd_copy, our_trick_index, depth)
         return best_card
 
@@ -40,6 +41,8 @@ class Carloid(Player):
     def find_best_card(self, rnd: ParallelUniverse, our_trick_index: int, depth: int) -> int:
         valid_cards = rnd.get_valid_cards()
         valid_card_indices = np.where(valid_cards == 1)[0]
+        if valid_card_indices.size == 1:
+            return valid_card_indices[0], 0
 
         unplayed_indices = np.where(rnd.trick == -1)[0]
         unplayed_indices = unplayed_indices[unplayed_indices != our_trick_index]
