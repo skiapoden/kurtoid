@@ -32,6 +32,7 @@ class ParallelUniverse:
 
     @property
     def nr_tricks(self):
+        # TODO: verify this
         # first unplayed card index is number of played cards
         cards_played = np.where(self.tricks == -1)[0][0]
         return ceil(cards_played / 4)

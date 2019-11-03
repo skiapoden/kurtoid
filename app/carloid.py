@@ -42,6 +42,7 @@ class Carloid(Player):
 
         unplayed_indices = np.where(rnd.trick == -1)[0]
         unplayed_indices = np.where(unplayed_indices != our_trick_index)[0]
+        # TODO: verify that unplayed_indices just contains the others indices
 
         best_result = np.iinfo(np.int32).min
         best_card = -1
@@ -59,9 +60,10 @@ class Carloid(Player):
             our_next_trick_index = (4 - winner) % 4
             if depth > 0:
                 pass 
-                # TODO: copy rnd (TODO set player attribute correctly)
+                # TODO: copy rnd (TODO set player attribute correctly, copy the rest)
                 # TODO: simulate subsequent rounds, call with depth-1
-                # TODO: add other rounds outcomes to result
+                # TODO: add other round outcomes to result
+                # TODO: consider running multiple simulations
             if result > best_result:
                 best_result = result
                 best_card = card_index
