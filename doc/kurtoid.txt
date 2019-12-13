@@ -1,0 +1,20 @@
+KURTOID(6)                   Games Manual                   KURTOID(6)
+
+NAME
+       Kurtoid  -  Bot  for the swiss card game "Jassen" developed for
+       the lecture "Deep Learning For Games"
+
+DESCRIPTION
+       Kurtoid is a simple bot.
+
+BOCKCHAIN
+       The Bockchain is a cutting-edge concept.
+
+MAXROUND
+       Maxround is stupid as fuck but smart enough.
+
+AUTHORS
+       Pascal Kiser  <pascal.kiser@stud.hslu.ch>  and  Patrick  Bucher
+       <patrick.bucher@stud.hslu.ch>
+
+                                                            KURTOID(6)
