@@ -21,7 +21,9 @@ TRUMP SELECTION
        Bockchain.  The trump option with  the  highest  score  is  se‐
        lected. If the player can select the trump forehand, and if the
        total score is below a threshold of five, the  trump  selection
-       is pushed to the partner.
+       is pushed to the partner. (The number of five was calculated by
+       simulating the card distribution many times. On average,  play‐
+       ers got a score a bit below 5 as the best trump option.)
 
 CARD SELECTION
        TODO:  simulate  round  for every card, pick card one, simulate
