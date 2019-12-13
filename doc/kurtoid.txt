@@ -38,4 +38,8 @@ AUTHORS
        Pascal Kiser  <pascal.kiser@stud.hslu.ch>  and  Patrick  Bucher
        <patrick.bucher@stud.hslu.ch>
 
+GITHUB
+       The   project's   code   can   be   found   on   GitHub   under
+       https://github.com/skiapoden/kurtoid
+
                                                             KURTOID(6)
