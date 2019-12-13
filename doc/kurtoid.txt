@@ -1,17 +1,38 @@
 KURTOID(6)                   Games Manual                   KURTOID(6)
 
 NAME
-       Kurtoid  -  Bot  for the swiss card game "Jassen" developed for
-       the lecture "Deep Learning For Games"
+       Kurtoid  ‒  Bot  for the swiss card game «Jassen» developed for
+       the lecture «Deep Learning For Games»
 
 DESCRIPTION
-       Kurtoid is a simple bot.
+       TODO: Kurtoid is a simple bot. There are multiple bots, we  use
+       trumpruloid.py...
 
-BOCKCHAIN
-       The Bockchain is a cutting-edge concept.
+TRUMP SELECTION
+       The  trump  selection  is implemented using a simple heuristic-
+       based algorithm using a concept called Bockchain.  A card  that
+       is  unbeatable for color trumps resp. unbeatable when played as
+       the first card in  «Obe-Abe»  or  «Unde-Ufe»  game,  is  called
+       «Bock»  in Swiss German. The idea behind the Bockchain is to go
+       through all six possible trump selections, and compute how many
+       «Böck»  are  in  the  hand for each of those. For each possible
+       trump, a score is calculated, which is computed by  the  number
+       of  cards  for  each  trump  color,  plus  the  length  of  the
+       Bockchain.  The trump option with  the  highest  score  is  se‐
+       lected. If the player can select the trump forehand, and if the
+       total score is below a threshold of five, the  trump  selection
+       is pushed to the partner.
 
-MAXROUND
-       Maxround is stupid as fuck but smart enough.
+CARD SELECTION
+       TODO:  simulate  round  for every card, pick card one, simulate
+       the other cards randomly, pick card with the best outcome
+
+DEPLOYMENT
+       The application is packed into a  Docker  container,  which  is
+       pushed  to Heroku. The credentials to the Enterprise Lab GitLab
+       are to be injected using environment variables into the  Docker
+       build  process, in order to pull the DL4G Jass library, without
+       exposing it to the internet.
 
 AUTHORS
        Pascal Kiser  <pascal.kiser@stud.hslu.ch>  and  Patrick  Bucher

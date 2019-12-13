@@ -1,8 +1,9 @@
 %!PS-Adobe-3.0
 %%Creator: groff version 1.22.4
-%%CreationDate: Fri Dec 13 14:32:10 2019
+%%CreationDate: Fri Dec 13 14:48:29 2019
 %%DocumentNeededResources: font Times-Roman
 %%+ font Times-Bold
+%%+ font Times-Italic
 %%DocumentSuppliedResources: procset grops 1.22 4
 %%Pages: 1
 %%PageOrder: Ascend
@@ -198,6 +199,7 @@ setpacking
 %%EndFeature
 %%IncludeResource: font Times-Roman
 %%IncludeResource: font Times-Bold
+%%IncludeResource: font Times-Italic
 grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72
 def/PL 841.89 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron
 /Zcaron/scaron/zcaron/Ydieresis/trademark/quotesingle/Euro/.notdef
@@ -226,7 +228,8 @@ def/PL 841.89 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron
 /egrave/eacute/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis
 /eth/ntilde/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash
 /ugrave/uacute/ucircumflex/udieresis/yacute/thorn/ydieresis]def
-/Times-Bold@0 ENC0/Times-Bold RE/Times-Roman@0 ENC0/Times-Roman RE
+/Times-Italic@0 ENC0/Times-Italic RE/Times-Bold@0 ENC0/Times-Bold RE
+/Times-Roman@0 ENC0/Times-Roman RE
 %%EndSetup
 %%Page: 1 1
 %%BeginPageSetup
@@ -234,15 +237,46 @@ BP
 %%EndPageSetup
 /F0 10/Times-Roman@0 SF(KUR)72 48 Q -.18(TO)-.6 G 145.22(ID\(6\) Games)
 .18 F 145.22(Manual KUR)2.5 F -.18(TO)-.6 G(ID\(6\)).18 E/F1 10.95
-/Times-Bold@0 SF -.219(NA)72 84 S(ME).219 E F0 -.15(Ku)108 96 S
-(rtoid \255 Bot for the swiss card g).15 E(ame "Jassen" de)-.05 E -.15
-(ve)-.25 G(loped for the lecture "Deep Learning F).15 E(or Games")-.15 E
-F1(DESCRIPTION)72 112.8 Q F0 -.15(Ku)108 124.8 S(rtoid is a simple bot.)
-.15 E F1(BOCKCHAIN)72 141.6 Q F0
-(The Bockchain is a cutting-edge concept.)108 153.6 Q F1(MAXR)72 170.4 Q
-(OUND)-.329 E F0(Maxround is stupid as fuck b)108 182.4 Q
-(ut smart enough.)-.2 E F1 -.548(AU)72 199.2 S(THORS).548 E F0 -.15(Pa)
-108 211.2 S(scal Kiser <pascal.kiser@stud.hslu.ch> and P).15 E
+/Times-Bold@0 SF -.219(NA)72 84 S(ME).219 E F0 -.15(Ku)108 96 S 2.5
+(rtoid Bot).15 F(for the swiss card g)2.5 E(ame \201Jassen\202 de)-.05 E
+-.15(ve)-.25 G(loped for the lecture \201Deep Learning F).15 E
+(or Games\202)-.15 E F1(DESCRIPTION)72 112.8 Q F0 -.18(TO)108 124.8 S
+(DO: K).18 E
+(urtoid is a simple bot. There are multiple bots, we use trumpruloid.p)
+-.15 E -.65(y.)-.1 G(..).65 E F1(TR)72 141.6 Q(UMP SELECTION)-.329 E F0
+2.486(The trump selection is implemented using a simple heuristic-based\
+ algorithm using a concept called)108 153.6 R/F2 10/Times-Italic@0 SF
+(Boc)108.58 165.6 Q(kc)-.2 E(hain)-.15 E F0 6.206(.A).24 G 1.207(card t\
+hat is unbeatable for color trumps resp. unbeatable when played as the \
+\214rst card in)-2.5 F .501(\201Obe-Abe\202 or \201Unde-Ufe\202 g)108
+177.6 R .501(ame, is called)-.05 F F2(\201Boc)2.971 E<6b82>-.2 E F0 .501
+(in Swiss German. The idea behind the)3.001 F F2(Boc)3.58 E(kc)-.2 E
+(hain)-.15 E F0 .5(is to)3.24 F .923
+(go through all six possible trump selections, and compute ho)108 189.6
+R 3.423(wm)-.25 G(an)-3.423 E 3.423<7981>-.15 G .924
+(B\366ck\202 are in the hand for each of)-3.423 F .788(those. F)108
+201.6 R .788(or each possible trump, a score is calculated, which is co\
+mputed by the number of cards for each)-.15 F .727(trump color)108 213.6
+R 3.227(,p)-.4 G .727(lus the length of the)-3.227 F F2(Boc)3.807 E(kc)
+-.2 E(hain)-.15 E F0 5.727(.T).24 G .727
+(he trump option with the highest score is selected. If the)-5.727 F
+.379
+(player can select the trump forehand, and if the total score is belo)
+108 225.6 R 2.879(wat)-.25 G .379(hreshold of \214v)-2.879 F .379
+(e, the trump selection)-.15 F(is pushed to the partner)108 237.6 Q(.)
+-.55 E F1(CARD SELECTION)72 254.4 Q F0 -.18(TO)108 266.4 S .293
+(DO: simulate round for e).18 F -.15(ve)-.25 G .294
+(ry card, pick card one, simulate the other cards randomly).15 F 2.794
+(,p)-.65 G .294(ick card with the)-2.794 F(best outcome)108 278.4 Q F1
+(DEPLO)72 295.2 Q(YMENT)-.548 E F0 .154(The application is pack)108
+307.2 R .154(ed into a Dock)-.1 F .154(er container)-.1 F 2.654(,w)-.4 G
+.153(hich is pushed to Heroku. The credentials to the Enter)-2.654 F(-)
+-.2 E .635(prise Lab GitLab are to be injected using en)108 319.2 R .635
+(vironment v)-.4 F .635(ariables into the Dock)-.25 F .636(er b)-.1 F
+.636(uild process, in order to)-.2 F(pull the DL4G Jass library)108
+331.2 Q 2.5(,w)-.65 G(ithout e)-2.5 E(xposing it to the internet.)-.15 E
+F1 -.548(AU)72 348 S(THORS).548 E F0 -.15(Pa)108 360 S
+(scal Kiser <pascal.kiser@stud.hslu.ch> and P).15 E
 (atrick Bucher <patrick.b)-.15 E(ucher@stud.hslu.ch>)-.2 E(1)535 768 Q 0
 Cg EP
 %%Trailer
