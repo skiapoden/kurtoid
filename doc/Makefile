@@ -5,11 +5,11 @@ all: kurtoid.pdf kurtoid.ps kurtoid.txt
 kurtoid.pdf: kurtoid.ps
 	ps2pdf $^ $@
 
-kurtoid.ps: kurtoid.6
-	man -lt $^ > $@
+kurtoid.ps: man6/kurtoid.6
+	MANPATH=. man -t 6 kurtoid > $@
 
-kurtoid.txt: kurtoid.6
-	MANWIDTH=72 man -l $^ > $@
+kurtoid.txt: man6/kurtoid.6
+	MANPATH=. MANWIDTH=72 man 6 kurtoid > $@
 
 clean:
 	rm -f kurtoid.pdf kurtoid.ps kurtoid.txt
