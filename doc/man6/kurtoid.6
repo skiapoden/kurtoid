@@ -1,16 +1,16 @@
 .TH KURTOID 6
 .SH NAME
-Kurtoid ‒ Bot for the swiss card game «Jassen» developed for the lecture «Deep Learning For Games»
+Kurtoid ‒ Bot for the swiss card game ``Jassen'' developed for the lecture «Deep Learning For Games»
 .SH DESCRIPTION
 TODO: Kurtoid is a simple bot. There are multiple bots, we use trumpruloid.py...
 .SH TRUMP SELECTION
 The trump selection is implemented using a simple heuristic-based algorithm using a concept called
 .IR Bockchain .
-A card that is unbeatable for color trumps resp. unbeatable when played as the first card in «Obe-Abe» or «Unde-Ufe» game, is called
-.IR «Bock»
+A card that is unbeatable for color trumps resp. unbeatable when played as the first card in ``Obe-Abe'' or ``Unde-Ufe'' game, is called
+.IR ``Bock''
 in Swiss German. The idea behind the
 .I Bockchain
-is to go through all six possible trump selections, and compute how many «Böck» are in the hand for each of those. For each possible trump, a score is calculated, which is computed by the number of cards for each trump color, plus the length of the
+is to go through all six possible trump selections, and compute how many ``Boeck'' are in the hand for each of those. For each possible trump, a score is calculated, which is computed by the number of cards for each trump color, plus the length of the
 .IR Bockchain .
 The trump option with the highest score is selected. If the player can select the trump forehand, and if the total score is below a threshold of five, the trump selection is pushed to the partner. (The number of five was calculated by simulating the card distribution many times. On average, players got a score a bit below 5 as the best trump option.)
 .SH CARD SELECTION
