@@ -14,9 +14,7 @@ is to go through all six possible trump selections, and compute how many «Böck
 .IR Bockchain .
 The trump option with the highest score is selected. If the player can select the trump forehand, and if the total score is below a threshold of five, the trump selection is pushed to the partner. (The number of five was calculated by simulating the card distribution many times. On average, players got a score a bit below 5 as the best trump option.)
 .SH CARD SELECTION
-TODO: simulate round for every card, pick card one,
-simulate the other cards randomly,
-pick card with the best outcome
+(TODO: simulate round for every card, pick card one, simulate the other cards randomly, pick card with the best outcome)
 The card selection is done by first determining all valid (playable) cards. If there is more than one, a simulation is started for each valid card, where the opponents are randomly assigned a card from the remaining unplayed cards. The points for each simulated round are calculated and the card yielding the best outcome is then played. 
 .SH DEPLOYMENT
 The application is packed into a Docker container, which is pushed to Heroku. The credentials to the Enterprise Lab GitLab are to be injected using environment variables into the Docker build process, in order to pull the DL4G Jass library, without exposing it to the internet.
