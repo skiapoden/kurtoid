@@ -1,20 +1,20 @@
 %!PS-Adobe-3.0
-%%Creator: groff version 1.19.2
-%%CreationDate: Wed Dec 18 12:04:39 2019
+%%Creator: groff version 1.22.4
+%%CreationDate: Wed Dec 18 18:31:53 2019
 %%DocumentNeededResources: font Times-Roman
 %%+ font Times-Bold
 %%+ font Times-Italic
-%%DocumentSuppliedResources: procset grops 1.19 2
+%%DocumentSuppliedResources: procset grops 1.22 4
 %%Pages: 1
 %%PageOrder: Ascend
-%%DocumentMedia: Default 612 792 0 () ()
+%%DocumentMedia: Default 595 842 0 () ()
 %%Orientation: Portrait
 %%EndComments
 %%BeginDefaults
 %%PageMedia: Default
 %%EndDefaults
 %%BeginProlog
-%%BeginResource: procset grops 1.19 2
+%%BeginResource: procset grops 1.22 4
 %!PS-Adobe-3.0 Resource-ProcSet
 /setpacking where{
 pop
@@ -72,6 +72,7 @@ exch pop add exch pop
 /level0 save def
 1 setlinecap
 1 setlinejoin
+DEFS/BPhook known{DEFS begin BPhook end}if
 72 RES div dup scale
 LS{
 90 rotate
@@ -137,7 +138,10 @@ pop
 findfont
 dup maxlength 1 index/FontName known not{1 add}if dict begin
 {
-1 index/FID ne{def}{pop pop}ifelse
+1 index/FID ne
+2 index/UniqueID ne
+and
+{def}{pop pop}ifelse
 }forall
 /Encoding exch def
 dup/FontName exch def
@@ -175,8 +179,10 @@ newpath
 userdict begin
 /showpage{}def
 /setpagedevice{}def
+mark
 }bind def
 /PEND{
+cleartomark
 countdictstack CNT sub{end}repeat
 level1 restore
 }bind def
@@ -189,17 +195,17 @@ setpacking
 %%EndProlog
 %%BeginSetup
 %%BeginFeature: *PageSize Default
-<< /PageSize [ 612 792 ] /ImagingBBox null >> setpagedevice
+<< /PageSize [ 595 842 ] /ImagingBBox null >> setpagedevice
 %%EndFeature
 %%IncludeResource: font Times-Roman
 %%IncludeResource: font Times-Bold
 %%IncludeResource: font Times-Italic
 grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72
-def/PL 792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron
-/scaron/zcaron/Ydieresis/trademark/quotesingle/Euro/.notdef/.notdef
+def/PL 841.89 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron
+/Zcaron/scaron/zcaron/Ydieresis/trademark/quotesingle/Euro/.notdef
 /.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
 /.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
-/.notdef/.notdef/space/exclam/quotedbl/numbersign/dollar/percent
+/.notdef/.notdef/.notdef/space/exclam/quotedbl/numbersign/dollar/percent
 /ampersand/quoteright/parenleft/parenright/asterisk/plus/comma/hyphen
 /period/slash/zero/one/two/three/four/five/six/seven/eight/nine/colon
 /semicolon/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O
@@ -229,57 +235,71 @@ def/PL 792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron
 %%BeginPageSetup
 BP
 %%EndPageSetup
-/F0 10/Times-Roman@0 SF(KUR)72 48 Q -.18(TO)-.6 G 353.76(ID\(6\) KUR).18
-F -.18(TO)-.6 G(ID\(6\)).18 E/F1 10.95/Times-Bold@0 SF -.219(NA)72 84 S
-(ME).219 E F0 -.15(Ku)108 96 S(rtoid \342 Bot for the swiss card g).15 E
-(ame `)-.05 E(`Jassen')-.74 E 2.5('d)-.74 G -2.15 -.25(ev e)-2.5 H
-(loped for the lecture `).25 E(`Deep Learning F)-.74 E(or Games')-.15 E
-(')-.74 E F1(DESCRIPTION)72 112.8 Q F0 -.18(TO)108 124.8 S(DO: K).18 E
-(urtoid is a simple bot. There are multiple bots, we use trumpruloid.p)
--.15 E -.65(y.)-.1 G(..).65 E F1(TR)72 141.6 Q(UMP SELECTION)-.329 E F0
-2.486(The trump selection is implemented using a simple heuristic-based\
- algorithm using a concept called)108 153.6 R/F2 10/Times-Italic@0 SF
-(Boc)108 165.6 Q(kc)-.2 E(hain)-.15 E F0 6.24(.A).24 G 1.241(card that \
-is unbeatable for color trumps resp. unbeatable when played as the \214\
-rst card in)-2.5 F -.74(``)108 177.6 S(Obe-Abe').74 E 2.7('o)-.74 G 2.7
-(r`)-2.7 G(`Unde-Ufe')-3.44 E 2.7('g)-.74 G .2(ame, is called)-2.75 F F2
--1.11(``)2.7 G(Boc)1.11 E(k')-.2 E(')-1.11 E F0 .2
-(in Swiss German. The idea behind the)2.7 F F2(Boc)3.28 E(kc)-.2 E(hain)
--.15 E F0 .2(is to)2.94 F .574
-(go through all six possible trump selections, and compute ho)108 189.6
+/F0 10/Times-Roman@0 SF(KUR)72 48 Q -.18(TO)-.6 G 145.22(ID\(6\) Games)
+.18 F 145.22(Manual KUR)2.5 F -.18(TO)-.6 G(ID\(6\)).18 E/F1 10.95
+/Times-Bold@0 SF -.219(NA)72 84 S(ME).219 E F0 -.15(Ku)108 96 S
+(rtoid \255 Bot for the swiss card g).15 E(ame `)-.05 E(`Jassen')-.74 E
+2.5('d)-.74 G -2.15 -.25(ev e)-2.5 H(loped for the course `).25 E
+(`Deep Learning F)-.74 E(or Games')-.15 E(')-.74 E F1(DESCRIPTION)72
+112.8 Q F0 -.15(Ku)108 124.8 S .479(rtoid is a collection of simple bot\
+s based on simple algorithms, heuristics, and randomness. The strong-)
+.15 F .451(est implementation is the bot)108 136.8 R/F2 10
+/Times-Italic@0 SF -.55(Tr)2.952 G(umpruler).55 E F0 2.952(,w).73 G .452
+(hich turned out to be quite competiti)-2.952 F -.15(ve)-.25 G 2.952(,d)
+.15 G .452(espite the simple un-)-2.952 F
+(derlying implementation. In the tournaments, the bot)108 148.8 Q F2
+-.55(Tr)2.5 G(umpruler).55 E F0(plays under the name)3.23 E F2 -.4(Ku)
+2.5 G(rtoid).4 E F0(.).77 E F1(TR)72 165.6 Q(UMP SELECTION)-.329 E F0
+1.257(The trump selection is implemented using a simple heuristic-based\
+ algorithm using a concept called the)108 177.6 R F2(Boc)108.58 189.6 Q
+(kc)-.2 E(hain)-.15 E F0 5.753(.A).24 G .754(card that is unbeatable fo\
+r color trumps resp. unbeatable when played as the \214rst card in a)
+-2.5 F -.74(``)108 201.6 S(Obe-Abe').74 E 2.905('o)-.74 G 2.905(r`)
+-2.905 G(`Unde-Ufe')-3.645 E 2.905('t)-.74 G .405(rick, is called)-2.905
+F F2 -1.11(``)2.905 G(Boc)1.11 E(k')-.2 E(')-1.11 E F0 .405
+(in Swiss German. The idea behind the)2.905 F F2(Boc)3.485 E(kc)-.2 E
+(hain)-.15 E F0 .405(is to)3.145 F .574
+(go through all six possible trump selections, and compute ho)108 213.6
 R 3.074(wm)-.25 G(an)-3.074 E 3.075(y`)-.15 G(`Boeck')-3.815 E 3.075('a)
--.74 G .575(re in the hand for each of)-3.075 F .788(those. F)108 201.6
-R .788(or each possible trump, a score is calculated, which is computed\
- by the number of cards for each)-.15 F .759(trump color)108 213.6 R
-3.259(,p)-.4 G .759(lus the length of the)-3.259 F F2(Boc)3.259 E(kc)-.2
-E(hain)-.15 E F0 5.759(.T).24 G .76
-(he trump option with the highest score is selected. If the)-5.759 F
-.379
-(player can select the trump forehand, and if the total score is belo)
-108 225.6 R 2.879(wat)-.25 G .379(hreshold of \214v)-2.879 F .379
-(e, the trump selection)-.15 F .106(is pushed to the partner)108 237.6 R
-2.606(.\()-.55 G .106(The number of \214v)-2.606 F 2.606(ew)-.15 G .107
-(as calculated by simulating the card distrib)-2.706 F .107(ution man)
--.2 F 2.607(yt)-.15 G(imes.)-2.607 E(On a)108 249.6 Q -.15(ve)-.2 G
-(rage, players got a score a bit belo).15 E 2.5(w5a)-.25 G 2.5(st)-2.5 G
-(he best trump option.\))-2.5 E F1(CARD SELECTION)72 266.4 Q F0 .371
-(The card selection is done by \214rst determining all v)108 278.4 R
+-.74 G .575(re in the hand for each of)-3.075 F .152
+(those, i.e. the length of the chain of `)108 225.6 R(`Boeck')-.74 E
+.152('. F)-.74 F .151
+(or each possible trump, a score is calculated, which is com-)-.15 F
+1.052(puted by the number of cards for each trump color)108 237.6 R
+3.552(,p)-.4 G 1.052(lus the length of the)-3.552 F F2(Boc)4.133 E(kc)
+-.2 E(hain)-.15 E F0 6.053(.T).24 G 1.053(he trump option)-6.053 F .173
+(with the highest score is selected. If the player can select the trump\
+ forehand, and if the total score is belo)108 249.6 R(w)-.25 E 2.702(at)
+108 261.6 S .202(hreshold of \214v)-2.702 F .202
+(e, the trump selection is pushed to the partner)-.15 F 2.703(.\()-.55 G
+.203(The number of \214v)-2.703 F 2.703(ew)-.15 G .203
+(as calculated by sim-)-2.803 F .095(ulating the card distrib)108 273.6
+R .095(ution man)-.2 F 2.595(yt)-.15 G .095(imes. On a)-2.595 F -.15(ve)
+-.2 G .095(rage, players got a score a bit belo).15 F 2.595(w5a)-.25 G
+2.595(st)-2.595 G .095(he best trump op-)-2.595 F(tion.\))108 285.6 Q F1
+(CARD SELECTION)72 302.4 Q F0 .371
+(The card selection is done by \214rst determining all v)108 314.4 R
 .371(alid \(playable\) cards. If there is more than one, a simu-)-.25 F
-.432(lation is started for each v)108 290.4 R .432(alid card, where the\
+.433(lation is started for each v)108 326.4 R .432(alid card, where the\
  opponents are randomly assigned a card from the remaining)-.25 F .461(\
 unplayed cards. The points for each simulated round are calculated and \
-the card yielding the best outcome)108 302.4 R(is then played.)108 314.4
-Q F1(DEPLO)72 331.2 Q(YMENT)-.548 E F0 .153(The application is pack)108
-343.2 R .153(ed into a Dock)-.1 F .153(er container)-.1 F 2.653(,w)-.4 G
-.154(hich is pushed to Heroku. The credentials to the Enter)-2.653 F(-)
--.2 E .636(prise Lab GitLab are to be injected using en)108 355.2 R .635
-(vironment v)-.4 F .635(ariables into the Dock)-.25 F .635(er b)-.1 F
-.635(uild process, in order to)-.2 F(pull the DL4G Jass library)108
-367.2 Q 2.5(,w)-.65 G(ithout e)-2.5 E(xposing it to the internet.)-.15 E
-F1 -.548(AU)72 384 S(THORS).548 E F0 -.15(Pa)108 396 S
-(scal Kiser <pascal.kiser@stud.hslu.ch> and P).15 E
+the card yielding the best outcome)108 338.4 R 1.239
+(is then played. More sophisticated algorithms, lik)108 350.4 R 3.739
+(es)-.1 G 1.239(imulating using dif)-3.739 F 1.239
+(ferent permutations, applying the)-.25 F
+(Minimax algorithm, etc. did not ha)108 362.4 Q .3 -.15(ve a p)-.2 H
+(ositi).15 E .3 -.15(ve e)-.25 H -.25(ff).15 G(ect on the performance.)
+.25 E F1(DEPLO)72 379.2 Q(YMENT)-.548 E F0 .153(The application is pack)
+108 391.2 R .153(ed into a Dock)-.1 F .153(er container)-.1 F 2.653(,w)
+-.4 G .154(hich is pushed to Heroku. The credentials to the Enter)-2.653
+F(-)-.2 E .636(prise Lab GitLab are to be injected using en)108 403.2 R
+.635(vironment v)-.4 F .635(ariables into the Dock)-.25 F .635(er b)-.1
+F .635(uild process, in order to)-.2 F
+(pull the DL4G Jass library without e)108 415.2 Q
+(xposing it to the internet.)-.15 E F1 -.548(AU)72 432 S(THORS).548 E F0
+-.15(Pa)108 444 S(scal Kiser <pascal.kiser@stud.hslu.ch> and P).15 E
 (atrick Bucher <patrick.b)-.15 E(ucher@stud.hslu.ch>)-.2 E F1(GITHUB)72
-412.8 Q F0(The project')108 424.8 Q 2.5(sc)-.55 G
+460.8 Q F0(The project')108 472.8 Q 2.5(sc)-.55 G
 (ode can be found on GitHub under https://github)-2.5 E
 (.com/skiapoden/kurtoid)-.4 E(1)535 768 Q 0 Cg EP
 %%Trailer

@@ -1,22 +1,27 @@
 .TH KURTOID 6
 .SH NAME
-Kurtoid ‒ Bot for the swiss card game ``Jassen'' developed for the lecture ``Deep Learning For Games''
+Kurtoid \- Bot for the swiss card game ``Jassen'' developed for the course ``Deep Learning For Games''
 .SH DESCRIPTION
-TODO: Kurtoid is a simple bot. There are multiple bots, we use trumpruloid.py...
+Kurtoid is a collection of simple bots based on simple algorithms, heuristics, and randomness. The strongest implementation is the bot
+.IR Trumpruler ,
+which turned out to be quite competitive, despite the simple underlying implementation. In the tournaments, the bot
+.I Trumpruler
+plays under the name
+.IR Kurtoid .
 .SH TRUMP SELECTION
-The trump selection is implemented using a simple heuristic-based algorithm using a concept called
+The trump selection is implemented using a simple heuristic-based algorithm using a concept called the
 .IR Bockchain .
-A card that is unbeatable for color trumps resp. unbeatable when played as the first card in ``Obe-Abe'' or ``Unde-Ufe'' game, is called
+A card that is unbeatable for color trumps resp. unbeatable when played as the first card in a ``Obe-Abe'' or ``Unde-Ufe'' trick, is called
 .IR ``Bock''
 in Swiss German. The idea behind the
 .I Bockchain
-is to go through all six possible trump selections, and compute how many ``Boeck'' are in the hand for each of those. For each possible trump, a score is calculated, which is computed by the number of cards for each trump color, plus the length of the
+is to go through all six possible trump selections, and compute how many ``Boeck'' are in the hand for each of those, i.e. the length of the chain of ``Boeck''. For each possible trump, a score is calculated, which is computed by the number of cards for each trump color, plus the length of the
 .IR Bockchain .
 The trump option with the highest score is selected. If the player can select the trump forehand, and if the total score is below a threshold of five, the trump selection is pushed to the partner. (The number of five was calculated by simulating the card distribution many times. On average, players got a score a bit below 5 as the best trump option.)
 .SH CARD SELECTION
-The card selection is done by first determining all valid (playable) cards. If there is more than one, a simulation is started for each valid card, where the opponents are randomly assigned a card from the remaining unplayed cards. The points for each simulated round are calculated and the card yielding the best outcome is then played. 
+The card selection is done by first determining all valid (playable) cards. If there is more than one, a simulation is started for each valid card, where the opponents are randomly assigned a card from the remaining unplayed cards. The points for each simulated round are calculated and the card yielding the best outcome is then played. More sophisticated algorithms, like simulating using different permutations, applying the Minimax algorithm, etc. did not have a positive effect on the performance.
 .SH DEPLOYMENT
-The application is packed into a Docker container, which is pushed to Heroku. The credentials to the Enterprise Lab GitLab are to be injected using environment variables into the Docker build process, in order to pull the DL4G Jass library, without exposing it to the internet.
+The application is packed into a Docker container, which is pushed to Heroku. The credentials to the Enterprise Lab GitLab are to be injected using environment variables into the Docker build process, in order to pull the DL4G Jass library without exposing it to the internet.
 .SH AUTHORS
 Pascal Kiser <pascal.kiser@stud.hslu.ch> and Patrick Bucher <patrick.bucher@stud.hslu.ch>
 .SH GITHUB

@@ -1,52 +1,58 @@
-KURTOID(6)                                                          KURTOID(6)
-
-
+KURTOID(6)                   Games Manual                   KURTOID(6)
 
 NAME
-       Kurtoid a Bot for the swiss card game ``Jassen'' developed for the lec-
-       ture ``Deep Learning For Games''
+       Kurtoid  - Bot for the swiss card game ``Jassen'' developed for
+       the course ``Deep Learning For Games''
 
 DESCRIPTION
-       TODO: Kurtoid is a simple bot. There are multiple bots, we use trumpru-
-       loid.py...
+       Kurtoid is a collection of simple bots based  on  simple  algo‐
+       rithms,  heuristics,  and randomness. The strongest implementa‐
+       tion is the bot Trumpruler, which turned out to be  quite  com‐
+       petitive,  despite the simple underlying implementation. In the
+       tournaments, the bot Trumpruler plays under the name Kurtoid.
 
 TRUMP SELECTION
-       The trump selection is implemented using a simple heuristic-based algo-
-       rithm using a concept called Bockchain.  A card that is unbeatable  for
-       color  trumps  resp. unbeatable when played as the first card in ``Obe-
-       Abe'' or ``Unde-Ufe'' game, is called ``Bock''  in  Swiss  German.  The
-       idea  behind  the  Bockchain  is  to  go through all six possible trump
-       selections, and compute how many ``Boeck'' are in the hand for each  of
-       those.  For  each  possible trump, a score is calculated, which is com-
-       puted by the number of cards for each trump color, plus the  length  of
-       the Bockchain.  The trump option with the highest score is selected. If
-       the player can select the trump forehand, and if  the  total  score  is
-       below  a  threshold of five, the trump selection is pushed to the part-
-       ner. (The number of five was calculated by simulating the card  distri-
-       bution many times. On average, players got a score a bit below 5 as the
-       best trump option.)
+       The trump selection is implemented using  a  simple  heuristic-
+       based  algorithm  using a concept called the Bockchain.  A card
+       that is unbeatable  for  color  trumps  resp.  unbeatable  when
+       played  as  the  first  card  in  a ``Obe-Abe'' or ``Unde-Ufe''
+       trick, is called ``Bock'' in Swiss German. The idea behind  the
+       Bockchain  is  to go through all six possible trump selections,
+       and compute how many ``Boeck'' are in  the  hand  for  each  of
+       those, i.e. the length of the chain of ``Boeck''. For each pos‐
+       sible trump, a score is calculated, which is  computed  by  the
+       number  of  cards  for each trump color, plus the length of the
+       Bockchain.  The trump option with  the  highest  score  is  se‐
+       lected. If the player can select the trump forehand, and if the
+       total score is below a threshold of five, the  trump  selection
+       is pushed to the partner. (The number of five was calculated by
+       simulating the card distribution many times. On average,  play‐
+       ers got a score a bit below 5 as the best trump option.)
 
 CARD SELECTION
-       The card selection is done by first determining  all  valid  (playable)
-       cards.  If  there  is  more  than one, a simulation is started for each
-       valid card, where the opponents are randomly assigned a card  from  the
-       remaining  unplayed cards. The points for each simulated round are cal-
-       culated and the card yielding the best outcome is then played.
+       The  card  selection  is  done  by  first determining all valid
+       (playable) cards. If there is more than one,  a  simulation  is
+       started  for  each valid card, where the opponents are randomly
+       assigned a card from the remaining unplayed cards.  The  points
+       for  each  simulated round are calculated and the card yielding
+       the best outcome is then played. More sophisticated algorithms,
+       like simulating using different permutations, applying the Min‐
+       imax algorithm, etc. did not have a positive effect on the per‐
+       formance.
 
 DEPLOYMENT
-       The application is packed into a Docker container, which is  pushed  to
-       Heroku. The credentials to the Enterprise Lab GitLab are to be injected
-       using environment variables into the Docker build process, in order  to
-       pull the DL4G Jass library, without exposing it to the internet.
+       The  application  is  packed  into a Docker container, which is
+       pushed to Heroku. The credentials to the Enterprise Lab  GitLab
+       are  to be injected using environment variables into the Docker
+       build process, in order to pull the DL4G Jass  library  without
+       exposing it to the internet.
 
 AUTHORS
-       Pascal    Kiser    <pascal.kiser@stud.hslu.ch>   and   Patrick   Bucher
+       Pascal  Kiser  <pascal.kiser@stud.hslu.ch>  and  Patrick Bucher
        <patrick.bucher@stud.hslu.ch>
 
 GITHUB
-       The project's code can be found on GitHub under https://github.com/ski-
-       apoden/kurtoid
+       The   project's   code   can   be   found   on   GitHub   under
+       https://github.com/skiapoden/kurtoid
 
-
-
-                                                                    KURTOID(6)
+                                                            KURTOID(6)
