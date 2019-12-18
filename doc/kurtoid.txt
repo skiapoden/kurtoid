@@ -4,7 +4,7 @@ KURTOID(6)                                                          KURTOID(6)
 
 NAME
        Kurtoid a Bot for the swiss card game ``Jassen'' developed for the lec-
-       ture A<<Deep Learning For GamesA>>
+       ture ``Deep Learning For Games''
 
 DESCRIPTION
        TODO: Kurtoid is a simple bot. There are multiple bots, we use trumpru-
